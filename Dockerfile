@@ -21,9 +21,9 @@ RUN npm install
 
 
 
-# Utilizamos el comando EXPOSE  para exponer el puerto 3000 del contenedor que es donde se estaria levantando nuestra aplicacion
+# Utilizamos el comando EXPOSE  para exponer el puerto 10000  del contenedor que es donde se estaria levantando nuestra aplicacion
 
-EXPOSE 3000
+EXPOSE ${PORT}
 
 #Utilizaremos el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE
 ENTRYPOINT ["node"]

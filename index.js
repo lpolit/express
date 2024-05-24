@@ -3,6 +3,7 @@ const path = require("path");
 const ejs = require("ejs");
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -19,5 +20,6 @@ app.get("/info", (req, res) => {
   // Se le pasan datos desde el servidor al html
   res.render("index", { titulo: umTitulo });
 });
-app.listen(3000);
-console.log("Servidor no porto 3000");
+
+app.listen(port);
+console.log("Servidor no porto " + port);

@@ -21,15 +21,18 @@ RUN npm install
 
 
 
-# Utilizamos el comando EXPOSE  para exponer el puerto 10000  del contenedor que es donde se estaria levantando nuestra aplicacion
+# Utilizamos el comando EXPOSE  para exponer el puerto 3000  del contenedor que es donde se estaria levantando nuestra aplicacion
 
-EXPOSE ${PORT}
+EXPOSE 3000
 
-#Utilizaremos el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE
-ENTRYPOINT ["node"]
 
-# Opcionalmente se podria usar el comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
-# CMD ["node", "index.js"]
+# Vamos a usar el comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
+# asi cuando lo deployamos en el servidor en linea no hay que definir nada mas
+CMD ["node", "index.js"]
+
+
+#Opcionalmente se puede usar el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE sin parametros
+#ENTRYPOINT ["node"]
 
 
 

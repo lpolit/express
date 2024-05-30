@@ -36,13 +36,40 @@ El Primer paso para crear el Dockerfile es entrar a DockerHub.(Este sitio contie
 
 ### Contenido
 
-FROM => Define la imagen base
-RUN => para instalar dependencias
-WORKDIR /app => creamos directorio de trabajo
-COPY => Copia contenido
-EXPOSE => Expone puerto
-ENTRYPOINT ["node"] (opcional)  => Ejecutar dentro del contendor
-CMD ["node", "index.js"] (opcional) => Ejecutar dentro del contendor
+``` bash
+# Un archivo docker (dockerfile) comienza siempre importanto la imagen base. 
+# Utilizamos la palabra clave 'FROM' para hacerlo.
+# En nuestro ejemplo, queremos importar la imagen de NODE
+# Así que escribimos 'node' para el nombre de la imagen y 'latest' para la versión.
+
+FROM node
+
+# Para lanzar nuestro código node, debemos importarlo a nuestra imagen.
+# Utilizamos la palabra clave WORKDIR para crear el directorio "app".
+WORKDIR /app
+
+# Utilizamos la palabra clave 'COPY' para importar el codigo.
+# El primer parámetro '.' indica TODO el contenido de la carpeta donde estamos parados
+# El segundo parámetro '.' es la ruta donde poner los archivos en la imagen.(app) 
+
+COPY . .
+
+# Utilizamos el comando RUN para Instalar las dependencias de nuestro proyecto
+# Esto se ejecuta al construir la imagen 
+RUN npm install
+
+
+
+# Utilizamos el comando EXPOSE  para exponer el puerto 3000  del contenedor que es donde se estaria levantando nuestra aplicacion
+
+EXPOSE 3000
+
+#Utilizaremos el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE
+#ENTRYPOINT ["node"]
+
+# Opcionalmente se podria usar el comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
+CMD ["node", "index.js"]
+```
 
 ### Diferencia entre RUN, CMD y ENTRYPOINT
 
@@ -72,7 +99,7 @@ Una imagen de Docker, es un archivo ejecutable e independiente que se utiliza pa
 ### Construyendo la imagen
 
 ``` bash
-    docker run build -t mi_imagen .
+    docker build -t nombre_imagen .
 ```
 
 ### Ver las imagenes creadas
@@ -84,25 +111,25 @@ docker images
 ### Arrancar la aplicacion
 
 ``` bash
-docker run -p 8080:3000 mi_imagen index.js
+docker run -p 8080:3000 nombre_imagen 
 ```
 
 ### Entrar al contenedor
 
 ``` bash
 docker ps
-docker exec -it b7bff /bin/bash
+docker exec -it id_contenedor /bin/bash
 
 ```
 
 ## SUBIR IMAGEN A DOCKER HUB
 
-Crearse una cuenta
-crearse un repositorio
-renombrar la imagen con el nombre de ese repo
-docker tag local-image:tagname new-repo:tagname
-docker login
-docker push new-repo:tagname
+- Loguearse con la cuenta de Github
+- Crearse un repositorio donde se alojaran nuestras imagenes.
+- En nuestra consola, renombrar la imagen que generamos previamente con el nombre del repositorio que creamos.
+- docker tag local-image:tagname new-repo:tagname
+- docker login
+- docker push new-repo:tagname
 
 ## DEPLOY
 
@@ -131,3 +158,17 @@ Para ello los pasos son:
 - cargamos los datos necesarios:
     Image URL: lpolitano/mi_imagen:1.0.5
     Environment variable: PORT = 3000
+
+--
+
+#### Alternativa si no pueden instalar docker
+
+https://app.codeanywhere.com/
+
+- Loguearse con el usuario de github
+- Crear un workspace (seleccionando el repositorio github a utilizar)
+
+Se nos abre un editor como un VSCode
+
+- Abrimos una terminal
+- Ejecutamos los comandos docker vistos

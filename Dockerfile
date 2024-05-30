@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY . .
 
-# Utilizamos el comando RUN para Instar las dependencias de nuestro proyecto
+# Utilizamos el comando RUN para Instalar las dependencias de nuestro proyecto
 # Esto se ejecuta al construir la imagen 
 RUN npm install
 
@@ -25,14 +25,11 @@ RUN npm install
 
 EXPOSE 3000
 
-
-# Vamos a usar el comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
-# asi cuando lo deployamos en el servidor en linea no hay que definir nada mas
-CMD ["node", "index.js"]
-
-
-#Opcionalmente se puede usar el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE sin parametros
+#Utilizaremos el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE
 #ENTRYPOINT ["node"]
+
+# Opcionalmente se podria usar el comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
+CMD ["node", "index.js"]
 
 
 

@@ -41,7 +41,6 @@ El Primer paso para crear el Dockerfile es entrar a DockerHub.(Este sitio contie
 # Utilizamos la palabra clave 'FROM' para hacerlo.
 # En nuestro ejemplo, queremos importar la imagen de NODE
 # Así que escribimos 'node' para el nombre de la imagen y 'latest' para la versión.
-
 FROM node
 
 # Para lanzar nuestro código node, debemos importarlo a nuestra imagen.
@@ -51,7 +50,6 @@ WORKDIR /app
 # Utilizamos la palabra clave 'COPY' para importar el codigo.
 # El primer parámetro '.' indica TODO el contenido de la carpeta donde estamos parados
 # El segundo parámetro '.' es la ruta donde poner los archivos en la imagen.(app) 
-
 COPY . .
 
 # Utilizamos el comando RUN para Instalar las dependencias de nuestro proyecto
@@ -59,16 +57,14 @@ COPY . .
 RUN npm install
 
 
-
 # Utilizamos el comando EXPOSE  para exponer el puerto 3000  del contenedor que es donde se estaria levantando nuestra aplicacion
-
 EXPOSE 3000
 
-#Utilizaremos el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE
-#ENTRYPOINT ["node"]
-
-# Opcionalmente se podria usar el comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
+# Utilizaremosel comando CMD para ejecutar dentro del contendor y fijar la app a levantar (Facilmente sobreescribible)
 CMD ["node", "index.js"]
+
+#Opcionalmente existe el comando  ENTRYPOINT para ejecutar dentro del contendor el servidor NODE
+#ENTRYPOINT ["node"]
 ```
 
 ### Diferencia entre RUN, CMD y ENTRYPOINT

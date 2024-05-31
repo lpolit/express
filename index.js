@@ -21,6 +21,12 @@ app.get("/info", (req, res) => {
   res.render("index", { titulo: umTitulo });
 });
 
+app.get("/nuevo", (req, res) => {
+  const umTitulo = "Este es mi nuevo endpoint";
+  // Se le pasan datos desde el servidor al html
+  res.render("index", { titulo: umTitulo });
+});
+
 
 app.listen(port);
 console.log("Servidor no porto " + port);
